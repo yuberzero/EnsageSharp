@@ -14,7 +14,7 @@ namespace TinkerSharp
     internal class Program
     {
         private static Ability Laser, Rocket, Refresh;
-        private static Item Blink, Dagon, Hex, Soulring, Ethereal, Veil, Orchid, Shiva;
+        private static Item Dagon, Hex, Soulring, Ethereal, Veil, Orchid, Shiva;
         private static Hero me;
         private static Hero target;
         private static Key toggleKey = Key.J;
@@ -62,7 +62,6 @@ namespace TinkerSharp
             Refresh = me.Spellbook.Spell4;
 
             // Item init
-            Blink = me.FindItem("item_blink");
             Dagon = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_dagon"));
             Hex = me.FindItem("item_sheepstick");
             Soulring = me.FindItem("item_soul_ring");
@@ -98,13 +97,7 @@ namespace TinkerSharp
                     }
 
                     // Blink
-                    else if (Blink != null && Blink.CanBeCasted() && Utils.SleepCheck("blink") && me.Distance2D(target) > 400)
-                    {
-                        Utils.Sleep(300 + Game.Ping, "blink");
-                        Utils.ChainStun(me, me.GetTurnTime(target) * 1000 + Game.Ping, null, false);
-                        Blink.UseAbility(target.Position);
-                    }
-
+                    
                     // Items
                     else if (Veil != null && Veil.CanBeCasted() && Utils.SleepCheck("veil"))
                     {
